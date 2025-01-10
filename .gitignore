@@ -1,0 +1,8 @@
+*.a
+*.o
+*.out
+*.exe
+*.json
+.vscode
+
+

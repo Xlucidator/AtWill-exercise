@@ -15,8 +15,6 @@ using namespace std;
 const unsigned long long MOD = 1e9 + 7;
 const int N = 1e5 + 1; 
 const int M = 5 * 1e5 + 1;
-const int INF = 0x7fffffff;
-
 
 uint64_t last_time = 0;
 
@@ -54,7 +52,7 @@ inline void topoSortRoundTrip() {
 
     // Get gt
     for (int i = 0; i < n; ++i) {
-        gt[i] = INF;
+        gt[i] = last_time;
         if (out_degree[i] == 0) {
             q.push(i);
             gt[i] = last_time - atime[i];
@@ -109,8 +107,8 @@ int main() {
     /* Get result */
     uint64_t result = 1;
     for (int i = 0; i < n; ++i) {
-        // result = result * (gt[i] - ft[i] + 1) % MOD;
-        result = quickMulMod(result, gt[i] - ft[i] + 1);
+        result = result * (gt[i] - ft[i] + 1) % MOD; // even slower in total
+        // result = quickMulMod(result, gt[i] - ft[i] + 1);
     }
     printf("%lu\n%lu\n", last_time, result);
 

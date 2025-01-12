@@ -98,7 +98,7 @@ int main() {
     for (int i = sa.size()-1; i >= 0; --i) vec_a.push_back(sa[i] - '0');
     for (int i = sb.size()-1; i >= 0; --i) vec_b.push_back(sb[i] - '0');
     vector<int> vec_res = multiply(vec_a, vec_a.size(), vec_b, vec_b.size());
-    printf("FFT result: ");
+    printf("FFT result:\t");
     printVecNum(vec_res);
 
     // sa, sb -> a, b
@@ -112,7 +112,7 @@ int main() {
         b += (sb[i] - '0');
     }
     uint64_t res = a * b;
-    printf("uint64_t result: %lu\n", res);
+    printf("Int result:\t%lu\n", res);
 
     return 0;
 }

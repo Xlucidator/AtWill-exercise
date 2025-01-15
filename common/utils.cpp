@@ -11,7 +11,7 @@ void printVec(const vector<uint8_t>& vec, const char* name) {
     putchar('\n');
 }
 
-void printVec(int (*arr)[MAX_M], int n, int m, const char* name) {
+void printVec(int (*arr)[100], int n, int m, const char* name) {
     printf("[vector %s]\n", name);
     for (int i = 0; i < n; ++i) {
         printf("\t[%d] ", i);

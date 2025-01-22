@@ -24,6 +24,7 @@ int main() {
             for (int k = 0; k <= s[i]; k++) {
                 if (j - k*v[i] >= 0) dp[j] = max(dp[j], dp[j - k*v[i]] + k*w[i]);
             }
+            // printf("Update dp[%d][%d] to %d\n", i, j, dp[j]);
         }
     }
     for (int k = 0; k <= s[N]; k++) // i = N, j = V

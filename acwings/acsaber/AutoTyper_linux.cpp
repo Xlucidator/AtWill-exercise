@@ -86,7 +86,7 @@ int main() {
             // if (is_key_down(display, XK_Insert) && is_key_down(display, XK_BackSpace)) break;
             KeySym keysym = get_XStringToKeysym(chbuf);
             KeyCode keycode = XKeysymToKeycode(display, keysym);
-            printf("ch = %c, KeySym = %lu, KeyCode = %u\n", chbuf[0], keysym, keycode);
+            printf("ch = \'%c\', KeySym = %lu, KeyCode = %u\n", chbuf[0], keysym, keycode);
             simulate_key(display, get_XStringToKeysym(chbuf));
             // putchar(ch);
             usleep(5000); // 延时 0.5 毫秒

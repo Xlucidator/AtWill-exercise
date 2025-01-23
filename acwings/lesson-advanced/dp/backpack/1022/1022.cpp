@@ -22,11 +22,11 @@ int main() {
     }
 
     int max_num = dp[N][M-1];
-    int min_damage = M-1;
+    int min_dmg = M-1;
     auto& dp_N = dp[N];
-    for (; min_damage >= 0 && dp_N[min_damage] == max_num; min_damage--);
+    for (; min_dmg >= 0 && dp_N[min_dmg] == max_num; min_dmg--);
 
-    printf("%d %d\n", max_num, M - min_damage - 1);
+    printf("%d %d\n", max_num, M - min_dmg - 1);
 
     return 0;
 }

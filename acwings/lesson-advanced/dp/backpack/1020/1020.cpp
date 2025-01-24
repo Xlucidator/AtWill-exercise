@@ -4,11 +4,22 @@
 
 using namespace std;
 
-const int MAXO = 22, MAXN = 80;
+// WRONG！ should be 21 * 1000, 79 * 1000
+const int MAXO = 21 + 21 + 2, MAXN = 79 + 79 + 2;
 const int NUL = 0x3f3f3f3f;
 
 int M/* Oxygen */, N/* Nitrogen */, K;
-int dp[MAXO][MAXN];
+int dp[21000][MAXN];
+
+void printDPLegal(int round) {
+    printf("[Round %d]\n", round);
+    for (int j = 0; j < MAXO; ++j) {
+        for (int k = 0; k < MAXN; ++k) {
+            if (dp[j][k] != NUL) printf("f[%d][%d]: %d\n", j, k, dp[j][k]);
+        }
+    }
+    puts("");
+}
 
 int main() {
     scanf("%d%d%d", &M, &N, &K);
@@ -24,8 +35,8 @@ int main() {
                 dp[j][k] = min(dp[j][k], dp[j-a][k-b] + c);
             }
         }
+        printDPLegal(i+1);
     }
-    cout << dp[M][N] << endl;
 
     int res = NUL;
     for (int j = M; j < MAXO; ++j) {

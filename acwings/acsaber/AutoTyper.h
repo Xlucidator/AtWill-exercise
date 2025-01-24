@@ -9,7 +9,7 @@
 #include <iostream>
 #include <unordered_map>
 
-std::unordered_map<char, KeySym> custom_keysyms = {
+std::unordered_map<char, KeySym> char_to_keysyms = {
     {'~', XK_asciitilde},
     {'!', XK_exclam},
     {'@', XK_at},
@@ -47,9 +47,10 @@ std::unordered_map<char, KeySym> custom_keysyms = {
     {'\t', XK_Tab},
 };
 
-inline KeySym get_custom_keysym(char ch) {
-    auto it = custom_keysyms.find(ch);
-    if (it != custom_keysyms.end()) {
+
+inline KeySym CharToKeysym(char ch) {
+    auto it = char_to_keysyms.find(ch);
+    if (it != char_to_keysyms.end()) {
         return it->second;
     }
     return XStringToKeysym(&ch);
@@ -57,7 +58,7 @@ inline KeySym get_custom_keysym(char ch) {
 
 inline KeySym get_XStringToKeysym(char* ch) {
     KeySym keysym = XStringToKeysym(ch);
-    if (keysym == 0) keysym = get_custom_keysym(*ch);
+    if (keysym == 0) keysym = CharToKeysym(*ch);
     return keysym;
 }
 

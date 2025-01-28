@@ -5,6 +5,8 @@
 *.json
 .vscode
 
+tmp.txt
+
 
 */acsaber/out.txt
 */acsaber/log.txt

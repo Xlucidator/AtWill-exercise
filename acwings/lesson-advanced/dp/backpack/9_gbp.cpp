@@ -1,3 +1,38 @@
+#define SIMPLE
+#ifdef SIMPLE
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXN = 102, MAXV = 102;
+const int MAXS = 102;
+
+int N,V;
+int dp[MAXV];
+
+int main() {
+    cin >> N >> V;
+    
+    int s;
+    int v[MAXS] = {0}, w[MAXS] = {0}; // Remember to Initialize [0] = 0, It's Local Variables!
+    for (int i = 1; i <= N; ++i) {
+        cin >> s;
+        for (int k = 1; k <= s; ++k) cin >> v[k] >> w[k];
+        for (int j = V; j > 0; --j) {
+            for (int k = 0; k <= s; ++k) {
+                if (j >= v[k]) dp[j] = max(dp[j], dp[j-v[k]] + w[k]);
+            }
+        }
+    }
+    cout << dp[V] << endl;
+    
+    return 0;
+}
+
+#else
+
 #include <iostream>
 #include <algorithm>
 
@@ -76,3 +111,5 @@ int main() {
 
     return 0;
 }
+
+#endif

@@ -1,5 +1,52 @@
 // Backpack Concrete Method Display
 
+#define SIMPLE
+#ifdef SIMPLE
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXN = 1002, MAXV = 1002;
+
+int dp[MAXV]; // 1d is ok
+bool select_q[MAXN][MAXV];
+int v[MAXN], w[MAXN];
+int N, V;
+
+int main() {
+    cin >> N >> V;
+    for (int i = 1; i <= N; ++i) cin >> v[i] >> w[i];
+    for (int i = N; i >= 1; --i) {
+        for (int j = V; j >= 1; --j) {
+            if (j >= v[i]) {
+                int nvalue = dp[j-v[i]] + w[i]; // use
+                if (nvalue >= dp[j]) {
+                    dp[j] = nvalue;
+                    select_q[i][j] = 1;
+                    continue;
+                }
+            }
+            select_q[i][j] = 0;
+        }
+    }
+    
+    int j = V;
+    for (int i = 1; i <= N; i++) {
+        if (select_q[i][j]) {
+            cout << i << " ";
+            j -= v[i];
+        }
+    }
+    cout << endl;
+    
+    return 0;
+}
+
+
+#else
+
 #include <iostream>
 #include <algorithm>
 
@@ -57,3 +104,5 @@ int main() {
 
     return 0;
 }
+
+#endif

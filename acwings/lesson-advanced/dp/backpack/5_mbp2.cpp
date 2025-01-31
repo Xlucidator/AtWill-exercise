@@ -1,3 +1,38 @@
+#define SIMPLE
+#ifdef SIMPLE
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXV = 2002;
+
+int dp[MAXV];
+int N, V;
+
+int main() {
+    cin >> N >> V;
+    int v, w, s;
+    for (int i = 1; i <= N; ++i) {
+        cin >> v >> w >> s;
+        
+        int k = 1, kv, kw;
+        while (s) {
+            kv = k * v, kw = k * w;
+            for (int j = V; j >= kv; --j)
+                dp[j] = max(dp[j], dp[j-kv] + kw);
+            s -= k;
+            k = min(s, k << 1);
+        }
+    }
+    cout << dp[V] << endl;
+    return 0;
+}
+
+
+#else
+
 #include <iostream>
 #include <algorithm>
 
@@ -66,3 +101,5 @@ int main() {
 
     return 0;
 }
+
+#endif

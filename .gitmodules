@@ -1,0 +1,3 @@
+[submodule "common/AutoTyper"]
+	path = common/AutoTyper
+	url = https://github.com/Xlucidator/AutoTyper.git

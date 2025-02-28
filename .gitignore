@@ -6,6 +6,7 @@
 .vscode
 
 tmp.txt
+output*.txt
 
 
 */acsaber/out.txt

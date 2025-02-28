@@ -25,7 +25,7 @@ void build(int u, int l, int r) {
 
 int query(int u, int l, int r) {
     // case 1: tr[u] belongs to [l, r]
-    if (tr[u].l >= l && tr[u].r <= r) return tr[u].max;
+    if (l <= tr[u].l && tr[u].r <= r) return tr[u].max;
 
     // case 2: tr[u] intersects with [l, r], contain case 3 [l, r] belongs to tr[u]
     int m = (tr[u].l + tr[u].r) >> 1;

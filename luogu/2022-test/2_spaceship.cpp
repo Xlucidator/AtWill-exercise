@@ -11,7 +11,7 @@ multiset<ll> fleets[N];
 multiset<ll>::iterator median_it[N];
 ll bonus[N];
 
-// fleets[x]: add level v ships
+// (1) fleets[x]: add level v ships
 void add(int x, ll v) {
     v -= bonus[x];
     fleets[x].insert(v);
@@ -28,67 +28,70 @@ void add(int x, ll v) {
     }
 }
 
-void remove(int x, multiset<ll>::iterator it) {
-    if (fleets[x].empty()) return;
-
-    if (fleets[x].size() % 2 == 1) { // former odd
-        if (it == median_it[x]) {
-            median_it[x] = fleets[x].erase(it);
-            median_it[x]--;
-        } else {
-            if (distance(it, median_it[x]) > 0) median_it[x]--;
-            fleets[x].erase(it);
-        }
-    } else {
-        if (it == median_it[x]) {
-            median_it[x] = fleets[x].erase(it);
-        } else {
-            if (distance(it, median_it[x]) < 0) median_it[x]++;
-            fleets[x].erase(it);
-        }
-    }
-}
-
-// fleets[x]: add level v for all ships
+// (2) fleets[x]: add level v for all ships
 void train(int x, ll v) {
     bonus[x] += v;
 }
 
-// move fleets[x].median to fleets[y]
+// (3) move fleets[x].median to fleets[y]
 void move(int x, int y) {
     if (fleets[x].empty()) return;
     
     add(y, *median_it[x] + bonus[x]);
-    remove(x, median_it[x]);
+
+    // remove median from x, and maintain
+    median_it[x] = fleets[x].erase(median_it[x]);
+    if (!fleets[x].empty() && (fleets[x].size() & 1) == 0) median_it[x]--;
 }
 
-// query flees[x].median
+// (4) query flees[x].median
 ll query(int x) {
     if (fleets[x].empty()) return 0;
     return *median_it[x] + bonus[x];
 }
 
-// move all ships from fleets[x] to fleets[y]
+// (5) move all ships from fleets[x] to fleets[y]
 void merge(int x, int y) {
+    if (fleets[x].empty()) return;
+
     if (fleets[x].size() > fleets[y].size()) {
         swap(fleets[x], fleets[y]);
         swap(bonus[x], bonus[y]); 
+        swap(median_it[x], median_it[y]);
     }
     for (ll v: fleets[x])
         add(y, v + bonus[x]);
 
     fleets[x].clear();
     median_it[x] = fleets[x].end();
+    bonus[x] = 0;
 }
 
-// remove ships that <= v from fleets[x]
+// (6) remove ships that <= v from fleets[x]
 void remove(int x, int v) {
     v -= bonus[x];
     auto& target = fleets[x];
-    for (auto it = target.begin(); it != target.end() && *it <= v; it++) {
+    for (auto it = target.begin(); it != target.end() && *it <= v;) {
         it = target.erase(it);
     }
-    median_it[x] = target.empty() ? target.end() : next(target.begin(), (target.size() - 1) / 2);
+    
+    if (target.empty()) {
+        median_it[x] = target.end();
+        bonus[x] = 0;
+    } else {
+        median_it[x] = next(target.begin(), (target.size() - 1) / 2);
+    }
+}
+
+void print_fleets() {
+    puts("[current state]");
+    for (int i = 1; i <= n; ++i) {
+        printf("\tfleets[%2d]: ", i);
+        for (const ll& val : fleets[i]) {
+            printf("%lld ", val + bonus[i]);
+        }
+        puts("");
+    }
 }
 
 int main() {
@@ -110,6 +113,7 @@ int main() {
                 case 6: remove(x, y); break;
                 default: break;
             }
+            // print_fleets();
         }
     }
 

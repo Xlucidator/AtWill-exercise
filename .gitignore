@@ -1,6 +1,6 @@
 *.a
 *.o
-*.out
+a.out
 *.exe
 *.json
 .vscode

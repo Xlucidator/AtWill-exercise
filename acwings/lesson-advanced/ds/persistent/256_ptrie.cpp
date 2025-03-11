@@ -28,6 +28,16 @@ void insert(int i, int k, int pre, int cur) { // i: s[i]   k: bit to deal with
     max_id[cur] = max(max_id[tr[cur][0]], max_id[tr[cur][1]]);
 }
 
+int query(int rt, int c, int l) { // c = s[n] ^ x, [l, r] : r decides the root[r-1]
+    int p = rt, u;
+    for (int i = 23; i >= 0; i--) {
+        u = c >> i & 1;
+        if (max_id[tr[p][u^1]] >= l) p = tr[p][u^1];
+        else p = tr[p][u];
+    }
+    return c ^ s[max_id[p]];
+}
+
 int main() {
     init();
     scanf("%d%d", &n, &m);
@@ -46,7 +56,7 @@ int main() {
     }
 
     char op;
-    int l, r, x;
+    int l, r;
     while (m--) {
         scanf(" %c", &op);
         if (op == 'A') {
@@ -56,6 +66,7 @@ int main() {
             insert(n, 23, root[n-1], root[n]);
         } else if (op == 'Q') {
             scanf("%d%d%d", &l, &r, &x);
+            printf("%d\n", query(root[r-1], s[n] ^ x, l-1));
         }
     }
 

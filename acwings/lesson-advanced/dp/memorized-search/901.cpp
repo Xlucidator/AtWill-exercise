@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <cstring>
+// #include <cstring>
 
 using namespace std;
 const int N = 310;
@@ -18,7 +18,6 @@ inline bool inbound(int x, int y) {
 int dpRecursive(int x, int y) {
     int& v = dp[x][y];
     if (v != 0) return v;
-    // printf("[trace] (%d, %d)\n", x, y);
 
     int a, b;
     for (int i = 0; i < 4; ++i) {
@@ -35,7 +34,6 @@ int main() {
         for (int j = 1; j <= m; ++j) 
             scanf("%d", &h[i][j]);
             
-    // memset(dp, -1, sizeof dp);
     int res = 0;
     for (int i = 1; i <= n; ++i)
         for (int j = 1; j <= m; ++j)

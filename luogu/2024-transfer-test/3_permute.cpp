@@ -49,7 +49,6 @@ int main() {
         /* New Round */
         // read in
         scanf("%d%d", &n, &k);
-        // printf("[debug] n = %d, k = %d\n", n, k);
         bool fail = 0;
         for (int i = 0; i < k; ++i) {
             scanf("%d%d", &p, &x);
@@ -87,21 +86,6 @@ int main() {
             }
         }
         puts("");
-
-        // int free_num = 1;
-        // for (int i = 1; i <= n; ++i) {
-        //     if (a[i] == 0) {
-        //         while (flags[free_num]) free_num++;
-        //         a[i] = free_num++;
-        //     }
-        // }
-        // if (free_num > n + 1) printf("-1\n");
-        // else {
-        //     for (int i = 1; i <= n; ++i) {
-        //         printf("%d ", a[i]);
-        //     }
-        //     puts("");
-        // }
     }
 
     return 0;

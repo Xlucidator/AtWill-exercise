@@ -93,7 +93,5 @@ int main() {
         printf("Test case #%d\n", ++k);
         printf("Total explored area: %.2lf\n\n", res);
     }
-    
-
     return 0;
 }

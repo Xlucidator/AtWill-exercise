@@ -4,12 +4,7 @@ a.out
 *.exe
 *.json
 .vscode
+.obsidian
 
 tmp.txt
 output*.txt
-
-
-*/acsaber/out.txt
-*/acsaber/log.txt
-*/acsaber/AutoTyper_linux
-*/acsaber/test.txt

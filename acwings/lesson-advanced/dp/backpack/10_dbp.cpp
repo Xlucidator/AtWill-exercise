@@ -29,8 +29,9 @@ void dfs(int u) {
         }
     }
 
+    // add u self
     for (int i = m; i >= v[u]; --i) dp[u][i] = dp[u][i-v[u]] + w[u];
-    for (int i = 0; i < v[u]; ++i) dp[u][i] = 0;
+    for (int i = 0; i < v[u]; ++i) dp[u][i] = 0; // cannot add u, illegal method
 }
 
 int main() {
